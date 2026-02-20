@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be Happy No BP</title>
+    <link href="images/smily_face.png" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: background 1s ease;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        #happyImage {
+            width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #quote {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: #fff;
+            min-height: 60px;
+            transition: opacity 0.5s ease;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 8px;
+            background: #fff;
+            color: #ff6f91;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #ff6f91;
+            color: white;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>✨ HI ANDI ✨</h1>
+
+        <!-- Random Happy Image -->
+        <img id="happyImage" src="images/smily_face.png" alt="Happy Image">
+
+        <div id="quote">Edho oka button click cheyandi </div>
+
+        <button onclick="newQuote()">Click cheyakandi 😊</button>
+        <button onclick="changeImage()">Dheeni click cheyandi 📸</button>
+        <button onclick="changeBackground()">Ivi just colors ri </button>
+    </div>
+
+    <script>
+        const quotes = [
+            "Entandi GOOGLE GOODNESS ante mee pere vasthundhi em chesaru ",
+            "Happy ga vundandi endhuku dull ga vunnaru, smile please 🥳🥳",
+            "Okasari pallu choopinchandi 😁😁😁😁😁 ila",
+            "Hi andi what a sudden surprise, baagunnara, mood baaledhu ante naaku msg cheyandi 😊",
+            "Enti What's your problem, ",
+            "Chaduvukondi firstuuu",
+            "Na 20 Crores yeppudu istharu???",
+            "Water thagaandi, fruits tinandi, healthy ga vundandi, health is wealth",
+        ];
+
+        const images = [
+            "images/I_belive_in_you.jpeg",
+            "images/Iwillhandle.jpeg",
+            "images/andhame_asuya.jpeg",
+            "images/cat.jpeg",
+            "images/anti_delulu.jpeg",
+            "images/any_problem_dont_call.jpeg",
+            "images/aur_batao_friend.jpeg",
+            "images/baba_and_baby_girl.jpeg",
+            "images/bp_baby.jpeg",
+            "images/cat_smile.jpeg",
+            "images/come_here.jpeg",
+            "images/doing_better.jpeg",
+            "images/dont_be_the_problem.jpeg",
+            "images/drink_water.jpeg",
+            "images/ive_thagginchukunte_manchidhi.jpeg",
+            "images/jerry.jpeg",
+            "images/masala_dosa_meme.jpeg",
+            "images/mood_of_the_day_relax.jpeg",
+            "images/neeku_vunna_brain.jpeg",
+            "images/night_1.jpeg",
+            "images/red_velvet.jpeg",
+            "images/relaxxx.jpeg",
+            "images/shiva_and_baby_girl.jpeg",
+            "images/shiva_and_baby_girl_2.jpeg",
+            "images/tiger.jpeg",
+            "images/weird_brain.jpeg",
+            "images/ye_le_5_rupees.jpeg",
+        ];
+
+        // 🔹 Hide image by default
+        // Track last shown items
+        let lastQuoteIndex = -1;
+        let lastImageIndex = -1;
+        let lastColorIndex = -1;
+
+        window.onload = function () {
+            document.getElementById("happyImage").style.display = "none";
+        };
+
+function getRandomIndex(arr, lastIndex) {
+    let newIndex;
+    do {
+        newIndex = Math.floor(Math.random() * arr.length);
+    } while (newIndex === lastIndex && arr.length > 1);
+    return newIndex;
+}
+
+        function newQuote() {
+            const quote = document.getElementById("quote");
+            const img = document.getElementById("happyImage");
+
+            // Show quote, hide image
+            img.style.display = "none";
+            quote.style.display = "block";
+
+           const randomIndex = getRandomIndex(quotes, lastQuoteIndex);
+            lastQuoteIndex = randomIndex;
+
+            quote.style.opacity = 0;
+            setTimeout(() => {
+                quote.innerText = quotes[randomIndex];
+                quote.style.opacity = 1;
+            }, 300);
+
+            createHearts();
+        }
+
+        function changeBackground() {
+            const colors = [
+                "linear-gradient(135deg, #ff9a9e, #fad0c4)",
+                "linear-gradient(135deg, #a18cd1, #fbc2eb)",
+                "linear-gradient(135deg, #f6d365, #fda085)",
+                "linear-gradient(135deg, #84fab0, #8fd3f4)"
+            ];
+
+            const randomIndex = getRandomIndex(colors, lastColorIndex);
+            lastColorIndex = randomIndex;
+
+            document.body.style.background = colors[randomIndex];
+        }
+
+        function changeImage() {
+            const img = document.getElementById("happyImage");
+            const quote = document.getElementById("quote");
+
+            // Show image, hide quote
+            quote.style.display = "none";
+            img.style.display = "block";
+
+           const randomIndex = getRandomIndex(images, lastImageIndex);
+            lastImageIndex = randomIndex;
+
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = images[randomIndex];
+                img.style.opacity = 1;
+            }, 300);
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 10; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "😁";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.fontSize = Math.random() * 20 + 20 + "px";
+                heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
